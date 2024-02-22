@@ -1,5 +1,8 @@
 package com.example.labo4das;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
+
 public class JuegoNumeros {
     private int numeroAleatorio;
     private int digitosCorrectos = 0;
@@ -16,21 +19,21 @@ public class JuegoNumeros {
     }
 
     public void intentoUsuario(String numeroUsuario) {
-        aciertos=0;
-        digitosCorrectos=0;
+        aciertos = 0;
+        digitosCorrectos = 0;
         String numeroAleatorioStr = String.valueOf(this.getNumeroAleatorio());
-        int longitud = Math.min(numeroAleatorioStr.length(), numeroUsuario.length());
-        // Verifica cada dígito y su posición
-        for (int i = 0; i < longitud; i++) {
+
+        Set<Character> digitosConsiderados = new HashSet<>();
+
+        for (int i = 0; i < numeroUsuario.length(); i++) {
             char digitoAleatorio = numeroAleatorioStr.charAt(i);
             char digitoUsuario = numeroUsuario.charAt(i);
 
             if (digitoAleatorio == digitoUsuario) {
                 aciertos++; // Acierto de dígito (muerto)
-            }
-
-            if (numeroAleatorioStr.contains(String.valueOf(digitoUsuario))) {
+            } else if (numeroAleatorioStr.contains(String.valueOf(digitoUsuario)) && !digitosConsiderados.contains(digitoUsuario)) {
                 digitosCorrectos++; // Dígito correcto (independientemente de la posición) (herido)
+                digitosConsiderados.add(digitoUsuario);
             }
         }
     }
