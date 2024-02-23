@@ -130,7 +130,7 @@ public class JuegoActivity extends AppCompatActivity {
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-
+            requestPermissions(new String[] {android.Manifest.permission.POST_NOTIFICATIONS}, 1);
             int importancia = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, channelName, importancia);
 
@@ -162,7 +162,6 @@ public class JuegoActivity extends AppCompatActivity {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
-            requestPermissions(new String[] {android.Manifest.permission.POST_NOTIFICATIONS}, 1);
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
